@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+
+body {
+    margin: 0 auto;
+}
+.container {
+    
+}
+.toplayer {
+    background: olive none repeat scroll 0 0;
+    height: 25%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.topplayerdetails {
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+}
+.topplayerdetails img {
+}
+.leftlayer {
+    background: red none repeat scroll 0 0;
+    height: 50%;
+    position: absolute;
+    top: 25%;
+    width: 15%;
+}
+.centerlayer {
+    background: blue none repeat scroll 0 0;
+    height: 50%;
+    left: 15%;
+    position: absolute;
+    top: 25%;
+    width: 70%;
+}
+.board {
+    background-color: #cccccc;
+    border: 2px solid #666666;
+    border-radius: 10px;
+    height: 95%;
+}
+.rightlayer {
+    background: yellow none repeat scroll 0 0;
+    height: 50%;
+    position: absolute;
+    right: 0;
+    top: 25%;
+    width: 15%;
+}
+.bottomlayer {
+    background: orange none repeat scroll 0 0;
+    bottom: 0;
+    height: 25%;
+    position: absolute;
+    width: 100%;
+}
+.bottomplayerdetails {
+    margin: 0 auto;
+    text-align: center;
+    width: 60%;
+}
+.bottomplayerdetails img {
+}
+
+
+	</style>
+	<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+	<script>
+		function resize(){
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+			alert("window width: "+w+", height: "+h);
+		}
+	</script>
+</head>
+<body onresize="resize()">
+	<div class="container">
+		<div class="toplayer">
+			<div class="topplayerdetails">
+				<img src="men.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag3"/>
+			</div>
+		</div>
+		<div class="leftlayer">
+			<div class="leftplayerdetails">
+				<img src="women.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag2"/>
+			</div>
+		</div>
+		<div class="centerlayer">
+			<div class="board" ondrop="drop(event)" ondragover="allowDrop(event)">
+				
+			</div>
+		</div>
+		<div class="rightlayer">
+			<div class="rightplayerdetails">
+				<img src="men.png" title="player" />
+			</div>
+		</div>
+		<div class="bottomlayer">
+			<div class="bottomplayerdetails" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img src="women.png" title="player" draggable="true" ondragstart="drag(event)" id="drag1"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
