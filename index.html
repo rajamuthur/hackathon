@@ -1,107 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-	<style>
-
-body {
-    margin: 0 auto;
-}
-.container {
-    
-}
-.toplayer {
-    background: olive none repeat scroll 0 0;
-    height: 25%;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-.topplayerdetails {
-    margin: 0 auto;
-    text-align: center;
-    width: 50%;
-}
-.topplayerdetails img {
-}
-.leftlayer {
-    background: red none repeat scroll 0 0;
-    height: 50%;
-    position: absolute;
-    top: 25%;
-    width: 15%;
-}
-.centerlayer {
-    background: blue none repeat scroll 0 0;
-    height: 50%;
-    left: 15%;
-    position: absolute;
-    top: 25%;
-    width: 70%;
-}
-.board {
-    background-color: #cccccc;
-    border: 2px solid #666666;
-    border-radius: 10px;
-    height: 95%;
-}
-.rightlayer {
-    background: yellow none repeat scroll 0 0;
-    height: 50%;
-    position: absolute;
-    right: 0;
-    top: 25%;
-    width: 15%;
-}
-.bottomlayer {
-    background: orange none repeat scroll 0 0;
-    bottom: 0;
-    height: 25%;
-    position: absolute;
-    width: 100%;
-}
-.bottomplayerdetails {
-    margin: 0 auto;
-    text-align: center;
-    width: 60%;
-}
-.bottomplayerdetails img {
-}
-
-
-	</style>
-	<script>
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-}
-</script>
-	<script>
-		function resize(){
-			var w = window.innerWidth;
-			var h = window.innerHeight;
-			alert("window width: "+w+", height: "+h);
-		}
-	</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Mangathada</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/icon1.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/icon1.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/icon1.png">
+<link rel="apple-touch-icon-precomposed" href="img/icon1.png">
+<link rel="shortcut icon" href="img/icon1.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="description" content="Card game written in HTML/CSS/JS">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
 </head>
 <body onresize="resize()">
 	<div class="container">
 		<div class="toplayer">
 			<div class="topplayerdetails">
-				<img src="men.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag3"/>
+				<img src="img/men.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag3"/>
 			</div>
 		</div>
 		<div class="leftlayer">
 			<div class="leftplayerdetails">
-				<img src="women.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag2"/>
+				<img src="img/women.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag2"/>
 			</div>
 		</div>
 		<div class="centerlayer">
@@ -111,12 +35,12 @@ function drop(ev) {
 		</div>
 		<div class="rightlayer">
 			<div class="rightplayerdetails">
-				<img src="men.png" title="player" />
+				<img src="img/men.png" title="player" />
 			</div>
 		</div>
 		<div class="bottomlayer">
 			<div class="bottomplayerdetails" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<img src="women.png" title="player" draggable="true" ondragstart="drag(event)" id="drag1"/>
+				<img src="img/women.png" title="player" draggable="true" ondragstart="drag(event)" id="drag1"/>
 			</div>
 		</div>
 	</div>
