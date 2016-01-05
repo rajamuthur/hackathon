@@ -12,11 +12,15 @@ body {
     width: 100%;
 }
 .topplayerdetails {
+    height: 100%;
     margin: 0 auto;
+    position: relative;
     text-align: center;
-    width: 50%;
+    width: 60%;
 }
 .topplayerdetails img {
+    position: absolute;
+    left: 0;
 }
 .leftplayer {
     background: red none repeat scroll 0 0;
@@ -25,8 +29,23 @@ body {
     top: 25%;
     width: 15%;
 }
+.leftplayerdetails {
+    height: 100%;
+    position: relative;
+}
+.leftplayerdetails > img {
+    right: 0;
+    position: absolute;
+    top: 0;
+}
+
+.leftplayerdetails ul.hand {
+    left: 0;
+    position: absolute;
+    transform: rotate(90deg);
+}
+
 .centerplayer {
-    background: blue none repeat scroll 0 0;
     height: 50%;
     left: 15%;
     position: absolute;
@@ -39,6 +58,16 @@ body {
     border-radius: 10px;
     height: 95%;
 }
+
+.centerplayerdetails {
+    height: 100%;
+    position: relative;
+}
+
+.centerplayerdetails > img {
+    position: absolute;
+    right: 0;
+}
 .rightplayer {
     background: yellow none repeat scroll 0 0;
     height: 50%;
@@ -46,6 +75,26 @@ body {
     right: 0;
     top: 25%;
     width: 15%;
+}
+
+.rightplayerdetails {
+    height: 100%;
+    position: relative;
+}
+.rightplayerdetails > img {
+    position: absolute;
+    left: 0;
+}
+.rightplayerdetails ul.hand {
+    right: 0;
+	bottom: 0;
+    position: absolute;
+    transform: rotate(270deg);
+}
+.topplayerdetails ul.hand {
+    position: absolute;
+    right: 0;
+    transform: rotate(180deg);
 }
 .bottomplayer {
     background: orange none repeat scroll 0 0;
@@ -62,9 +111,9 @@ body {
     width: 60%;
 }
 .bottomplayerdetails img {
-    right: 0;
-	bottom:0;
+    bottom: 0;
     position: absolute;
+    right: 0;
 }
 .cardsset {
     position: relative;
@@ -104,9 +153,8 @@ body {
     box-shadow: 0.2em 0.2em 0.5em #333;
     display: inline-block;
     font-family: Arial,sans-serif;
-    font-size: 1.2em;
     font-weight: normal;
-    height: 4.6em;
+    height: 3.6em;
     margin: 0 0.5em 0.5em 0;
     padding: 0.25em;
     position: relative;
@@ -245,19 +293,19 @@ body {
     content: "♦\a ♦\a ♦";
 }
 .playingCards .card.rank-4.diams .suit::after {
-    content: "♦   ♦\a \a ♦   ♦";
+    content: "♦ ♦\a \a ♦ ♦";
 }
 .playingCards .card.rank-5.diams .suit::after {
-    content: "♦   ♦\a ♦\a ♦   ♦";
+    content: "♦ ♦\a ♦\a ♦ ♦";
 }
 .playingCards .card.rank-6.diams .suit::after {
-    content: "♦   ♦\a ♦   ♦\a ♦   ♦";
+    content: "♦ ♦\a ♦ ♦\a ♦ ♦";
 }
 .playingCards .card.rank-7.diams .suit::after {
-    content: "♦  ♦\a ♦ ♦ ♦\a ♦  ♦";
+    content: "♦ ♦\a ♦ ♦ ♦\a ♦ ♦";
 }
 .playingCards .card.rank-8.diams .suit::after {
-    content: "♦ ♦ ♦\a ♦  ♦\a ♦ ♦ ♦";
+    content: "♦ ♦ ♦\a ♦ ♦\a ♦ ♦ ♦";
 }
 .playingCards .card.rank-9.diams .suit::after {
     content: "♦ ♦ ♦\a ♦ ♦ ♦\a ♦ ♦ ♦";
@@ -272,19 +320,19 @@ body {
     content: "♥\a ♥\a ♥";
 }
 .playingCards .card.rank-4.hearts .suit::after {
-    content: "♥   ♥\a \a ♥   ♥";
+    content: "♥ ♥\a \a ♥ ♥";
 }
 .playingCards .card.rank-5.hearts .suit::after {
-    content: "♥   ♥\a ♥\a ♥   ♥";
+    content: "♥ ♥\a ♥\a ♥ ♥";
 }
 .playingCards .card.rank-6.hearts .suit::after {
-    content: "♥   ♥\a ♥   ♥\a ♥   ♥";
+    content: "♥ ♥\a ♥ ♥\a ♥ ♥";
 }
 .playingCards .card.rank-7.hearts .suit::after {
-    content: "♥  ♥\a ♥ ♥ ♥\a ♥  ♥";
+    content: "♥ ♥\a ♥ ♥ ♥\a ♥ ♥";
 }
 .playingCards .card.rank-8.hearts .suit::after {
-    content: "♥ ♥ ♥\a ♥  ♥\a ♥ ♥ ♥";
+    content: "♥ ♥ ♥\a ♥ ♥\a ♥ ♥ ♥";
 }
 .playingCards .card.rank-9.hearts .suit::after {
     content: "♥ ♥ ♥\a ♥ ♥ ♥\a ♥ ♥ ♥";
@@ -299,19 +347,19 @@ body {
     content: "♠\a ♠\a ♠";
 }
 .playingCards .card.rank-4.spades .suit::after {
-    content: "♠   ♠\a \a ♠   ♠";
+    content: "♠ ♠\a \a ♠ ♠";
 }
 .playingCards .card.rank-5.spades .suit::after {
-    content: "♠   ♠\a ♠\a ♠   ♠";
+    content: "♠ ♠\a ♠\a ♠ ♠";
 }
 .playingCards .card.rank-6.spades .suit::after {
-    content: "♠   ♠\a ♠   ♠\a ♠   ♠";
+    content: "♠ ♠\a ♠ ♠\a ♠ ♠";
 }
 .playingCards .card.rank-7.spades .suit::after {
-    content: "♠  ♠\a ♠ ♠ ♠\a ♠  ♠";
+    content: "♠ ♠\a ♠ ♠ ♠\a ♠ ♠";
 }
 .playingCards .card.rank-8.spades .suit::after {
-    content: "♠ ♠ ♠\a ♠  ♠\a ♠ ♠ ♠";
+    content: "♠ ♠ ♠\a ♠ ♠\a ♠ ♠ ♠";
 }
 .playingCards .card.rank-9.spades .suit::after {
     content: "♠ ♠ ♠\a ♠ ♠ ♠\a ♠ ♠ ♠";
@@ -326,19 +374,19 @@ body {
     content: "♣\a ♣\a ♣";
 }
 .playingCards .card.rank-4.clubs .suit::after {
-    content: "♣   ♣\a \a ♣   ♣";
+    content: "♣ ♣\a \a ♣ ♣";
 }
 .playingCards .card.rank-5.clubs .suit::after {
-    content: "♣   ♣\a ♣\a ♣   ♣";
+    content: "♣ ♣\a ♣\a ♣ ♣";
 }
 .playingCards .card.rank-6.clubs .suit::after {
-    content: "♣   ♣\a ♣   ♣\a ♣   ♣";
+    content: "♣ ♣\a ♣ ♣\a ♣ ♣";
 }
 .playingCards .card.rank-7.clubs .suit::after {
-    content: "♣  ♣\a ♣ ♣ ♣\a ♣  ♣";
+    content: "♣ ♣\a ♣ ♣ ♣\a ♣ ♣";
 }
 .playingCards .card.rank-8.clubs .suit::after {
-    content: "♣ ♣ ♣\a ♣  ♣\a ♣ ♣ ♣";
+    content: "♣ ♣ ♣\a ♣ ♣\a ♣ ♣ ♣";
 }
 .playingCards .card.rank-9.clubs .suit::after {
     content: "♣ ♣ ♣\a ♣ ♣ ♣\a ♣ ♣ ♣";
@@ -734,4 +782,32 @@ body {
 .playingCards ul.deck li:nth-child(32) {
     bottom: 1px;
     left: 62px;
+}
+.centerplayerdetails ul.hand {
+    color: red;
+    position: absolute;
+    top: 40% !important;
+}
+.gradient-pattern {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+height: 98%;
+
+    width: 100%;
+  border: medium solid;
+  font: normal 100%/normal Arial, Helvetica, sans-serif;
+  color: rgba(255,255,255,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: -webkit-linear-gradient(45deg, rgba(0,0,0,0.0980392) 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,0.0980392) 75%, rgba(0,0,0,0.0980392) 0), -webkit-linear-gradient(45deg, rgba(0,0,0,0.0980392) 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,0.0980392) 75%, rgba(0,0,0,0.0980392) 0), rgb(255, 255, 255);
+  background: -moz-linear-gradient(45deg, rgba(0,0,0,0.0980392) 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,0.0980392) 75%, rgba(0,0,0,0.0980392) 0), -moz-linear-gradient(45deg, rgba(0,0,0,0.0980392) 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,0.0980392) 75%, rgba(0,0,0,0.0980392) 0), rgb(255, 255, 255);
+  background: linear-gradient(45deg, rgba(0,0,0,0.0980392) 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,0.0980392) 75%, rgba(0,0,0,0.0980392) 0), linear-gradient(45deg, rgba(0,0,0,0.0980392) 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,0.0980392) 75%, rgba(0,0,0,0.0980392) 0), rgb(255, 255, 255);
+  background-position: 0 0, 40px 40px;
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: 80px 80px;
+  background-size: 80px 80px;
 }

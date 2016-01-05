@@ -35,33 +35,36 @@ var input = {
 				"is_active_player":true,
 				"player_id":"1_1",
 				"position":1,
-				"class":"bottomplayer"
+				"class":"bottomplayer",
+				"gender":'women'
 			},
 			"1":
 			{
 				"cards_count":5,
 				"show_all_cards":false,
 				"show_first_card":false,
-				"cards_name":["5_clubs","5_clubs","6_diams","1_clubs","9_clubs"],
+				"cards_name":["5_clubs","2_clubs","6_diams","1_clubs","9_clubs"],
 				"player_name":"Mr Y",
 				"next_to_play":false,
 				"is_active_player":false,
 				"player_id":"2_1",
 				"position":2,
-				"class":"leftplayer"
+				"class":"leftplayer",
+				"gender":'men'
 			},
 			"2":
 			{
-				"cards_count":1,
+				"cards_count":6,
 				"show_all_cards":false,
 				"show_first_card":false,
-				"cards_name":["6_spades"],
+				"cards_name":["6_diams","2_diams","6_diams","1_clubs","9_clubs","9_diams"],
 				"player_name":"Mr Z",
 				"next_to_play":false,
 				"is_active_player":false,
 				"player_id":"3_1",
 				"position":3,
-				"class":"topplayer"
+				"class":"topplayer",
+				"gender":'women'
 			},
 			"3":
 			{
@@ -74,7 +77,8 @@ var input = {
 				"is_active_player":false,
 				"player_id":"4_1",
 				"position":4,
-				"class":"rightplayer"
+				"class":"rightplayer",
+				"gender":'women'
 			}
 		},
 	"bank":
@@ -87,7 +91,8 @@ var input = {
 			"next_to_play":false,
 			"is_active_player":false,
 			"player_id":"",
-			"class":"centerplayer"
+			"class":"centerplayer",
+			"gender":'bank'
 		}
 };
 
@@ -127,21 +132,36 @@ function createPlayer(input){
 	//document.getElementById("container").innerHTML = output;
 	return output;
 }
+
 function createCenterDiv(input){
 	console.log("createCenterDiv input");
 	console.log(input);
 	var playerCls = input.class;
 	var output = '';
 	output += '<div class="'+playerCls+'">';
-	output += '<div class="'+playerCls+'details">';
-	output += '<img src="img/men.png" title="player"/>';
+	output += '<div class="'+playerCls+'details gradient-pattern">';
+	output += '<img src="img/'+input.gender+'.png" title="player"/>';
 	output += cardsSet(input);
+	output += getDeckofCards(10);
 	output += '</div>';
 	output += '</div>';
 	console.log("cardsset output");
 	console.log(output);
 	return output;
 }
+
+function getDeckofCards(cardscount){
+	var output = '';
+	output += '<ul class="deck">';
+	for(var i=0;i<cardscount;i++) 
+	{
+        output += '<li>';
+        output += '<div class="card back">*</div>';
+        output += '</li>';
+	}
+    return output += '</ul>';
+}
+
 function cardsSet(input){
 	console.log("cardsset input");
 	console.log(input);
@@ -156,7 +176,7 @@ function cardsSet(input){
 		output += '<li>';
 		output += '<a href="#" class="card rank-'+cardArr[0]+' '+cardArr[1]+'">';
 		output += '<span class="rank">'+cardArr[0]+'</span>';
-		var suit = (suit == 'diams')?'♦':((suit == 'hearts')?'♥':((suit == 'clubs')?'♣':'♠'));
+		var suit = cardArr[1] == 'diams'?'♦':(cardArr[1] == 'hearts'?'♥':(cardArr[1] == 'clubs'?'♣':'♠'));
 		output += '<span class="suit">'+suit+'</span>';
 		output += '</a>';
 		output += '</li>';
@@ -166,8 +186,7 @@ function cardsSet(input){
 	console.log("cardsset output");
 	console.log(output);
 	return output;
-	
-    
+
 }
 //createPlayer(input);
 </script>
