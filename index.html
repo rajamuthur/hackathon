@@ -15,34 +15,202 @@
 <meta name="description" content="Card game written in HTML/CSS/JS">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript">
+// Example input json
+var input = {
+	"totalplayer":4,
+	"game_id":"1",
+	"group_id":"1",
+	"active_player_id":"1_1",
+	"players":
+		{
+			"0":
+			{
+				"cards_count":3,
+				"show_all_cards":false,
+				"show_first_card":false,
+				"cards_name":["7_diams","5_clubs","3_diams"],
+				"player_name":"Mr X",
+				"next_to_play":true,
+				"is_active_player":true,
+				"player_id":"1_1",
+				"position":1,
+				"class":"bottomplayer"
+			},
+			"1":
+			{
+				"cards_count":5,
+				"show_all_cards":false,
+				"show_first_card":false,
+				"cards_name":["5_clubs","5_clubs","6_diams","1_clubs","9_clubs"],
+				"player_name":"Mr Y",
+				"next_to_play":false,
+				"is_active_player":false,
+				"player_id":"2_1",
+				"position":2,
+				"class":"leftplayer"
+			},
+			"2":
+			{
+				"cards_count":1,
+				"show_all_cards":false,
+				"show_first_card":false,
+				"cards_name":["6_spades"],
+				"player_name":"Mr Z",
+				"next_to_play":false,
+				"is_active_player":false,
+				"player_id":"3_1",
+				"position":3,
+				"class":"topplayer"
+			},
+			"3":
+			{
+				"cards_count":1,
+				"show_all_cards":false,
+				"show_first_card":false,
+				"cards_name":["7_spades"],
+				"player_name":"Mr A",
+				"next_to_play":false,
+				"is_active_player":false,
+				"player_id":"4_1",
+				"position":4,
+				"class":"rightplayer"
+			}
+		},
+	"bank":
+		{
+			"cards_count":4,
+			"show_all_cards":true,
+			"show_first_card":false,
+			"cards_name":["5_clubs","5_clubs","1_clubs","2_spades"],
+			"player_name":"Mr Bank",
+			"next_to_play":false,
+			"is_active_player":false,
+			"player_id":"",
+			"class":"centerplayer"
+		}
+};
+
+function createContainer(){
+	
+}
+
+function createPlayer(input){
+	console.log("createPlayer");
+	console.log(input);
+	var output = '<div id="container" class="container playingCards">';
+	var len = input.totalplayer;
+	var activePlayerId = input.active_player_id;
+	console.log("len: "+len);
+	console.log("activePlayerId: "+activePlayerId);
+	for(var i=0;i<len;i++) 
+	{
+		console.log(input["players"][i]);
+		var playerId = input["players"][i].player_id;
+		var playerCls = input["players"][i].class;
+		playerCls += (playerId == activePlayerId)?'':'';
+		console.log("playerCls: "+playerCls);
+		console.log("playerId: "+playerId);
+		output += '<div class="'+playerCls+'">';
+		output += '<div class="'+playerCls+'details">';
+		output += '<img src="img/men.png" title="player"/>';
+		output += cardsSet(input["players"][i]);
+		output += '</div>';
+		output += '</div>';
+	}
+	
+	console.log(input["bank"]);
+	output += createCenterDiv(input["bank"]);
+	output += '</div>';
+	console.log('Output: '+output);
+	console.log(document.getElementById("container"));
+	//document.getElementById("container").innerHTML = output;
+	return output;
+}
+function createCenterDiv(input){
+	console.log("createCenterDiv input");
+	console.log(input);
+	var playerCls = input.class;
+	var output = '';
+	output += '<div class="'+playerCls+'">';
+	output += '<div class="'+playerCls+'details">';
+	output += '<img src="img/men.png" title="player"/>';
+	output += cardsSet(input);
+	output += '</div>';
+	output += '</div>';
+	console.log("cardsset output");
+	console.log(output);
+	return output;
+}
+function cardsSet(input){
+	console.log("cardsset input");
+	console.log(input);
+	var output = '';
+		console.log(input);
+	var cardSet = input.cards_name;
+	var len = input.cards_count;
+	output += '<ul class="hand">';
+	for(var i=0;i<len;i++) 
+	{
+		var cardArr = cardSet[i].split('_');
+		output += '<li>';
+		output += '<a href="#" class="card rank-'+cardArr[0]+' '+cardArr[1]+'">';
+		output += '<span class="rank">'+cardArr[0]+'</span>';
+		var suit = (suit == 'diams')?'♦':((suit == 'hearts')?'♥':((suit == 'clubs')?'♣':'♠'));
+		output += '<span class="suit">'+suit+'</span>';
+		output += '</a>';
+		output += '</li>';
+	}
+	
+	output += '</ul>';
+	console.log("cardsset output");
+	console.log(output);
+	return output;
+	
+    
+}
+//createPlayer(input);
+</script>
 </head>
 <body onresize="resize()">
-	<div class="container">
-		<div class="toplayer">
+	<!-- <div class="container">
+		<div class="topplayer">
 			<div class="topplayerdetails">
 				<img src="img/men.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag3"/>
 			</div>
 		</div>
-		<div class="leftlayer">
+		<div class="leftplayer">
 			<div class="leftplayerdetails">
 				<img src="img/women.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag2"/>
 			</div>
 		</div>
-		<div class="centerlayer">
-			<div class="board" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<div class="centerplayer">
+			<div class="centerplayerdetails" ondrop="drop(event)" ondragover="allowDrop(event)">
 				
 			</div>
 		</div>
-		<div class="rightlayer">
+		<div class="rightplayer">
 			<div class="rightplayerdetails">
 				<img src="img/men.png" title="player" />
+				
 			</div>
 		</div>
-		<div class="bottomlayer">
+		<div class="bottomplayer">
 			<div class="bottomplayerdetails" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<img src="img/women.png" title="player" draggable="true" ondragstart="drag(event)" id="drag1"/>
+				<img src="img/women.png" height="25" width="25" title="player" draggable="true" ondragstart="drag(event)" id="drag1"/>		
+				<div class="cardsset">
+					<span class="c0"></span>
+					<span class="c1"></span>
+					<span class="c2"></span>
+					<span class="c3"></span>
+				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
+	<script>
+	document.write(createPlayer(input));
+	</script>
+	<div id="container" class="container playingCards"></div>
+
 </body>
 </html>
