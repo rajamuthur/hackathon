@@ -75,13 +75,15 @@
 					<p>Drag 4*</p>
 				</div>-->
 
-		<div class="getDetails">
-			<label> Username</label>
+		<div class="getDetails" style="padding-top:40px">
+			<label > Username</label>
 			<input type="text" value="" name="username" id="username"></input>
+			<input type="button" value="get_click" name="get_click" id="get_click"/>
+			<input type="button" value="post_click" name="post_click" id="post_click"/>
 			<input type="button" value="get" name="get" id="get"/>
 			<input type="button" value="post" name="post" id="post"/>
-			<input type="button" value="get1" name="get1" id="get1"/>
-			<input type="button" value="post1" name="post1" id="post1"/>
+			<input type="button" value="get_touch" name="get_touch" id="get_touch"/>
+			<input type="button" value="post_touch" name="post_touch" id="post_touch"/>
 		</div>
 		<div id="container" class="container playingCards"></div>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
@@ -103,7 +105,6 @@
 			});
 			
 			$("#get").bind('touchstart click', function () {
-//				var contentType ="application/x-www-form-urlencoded; charset=utf-8";
 
 				var params = {};
 				params.username = 'raja';
@@ -118,6 +119,67 @@
 					postback: {}
 				});
 			});
+			$("#post_click").bind('click', function () {
+				var params = {};
+				params.username = 'raja';
+				$.ajax({
+					type: 'POST',
+					url: 'http://10.100.103.19:3333/addPlayer',
+					data: {foo:'this is post method'},
+					dataType: 'json',
+					crossDomain:true,
+					success: submitUserSuccess,
+					failure: submitUserFailure,
+					postback: {}
+				});
+			});
+			
+			$("#get_click").bind('click', function () {
+
+				var params = {};
+				params.username = 'raja';
+				$.ajax({
+					type: 'GET',
+					url: 'http://10.100.103.19:3333/getPlayers',
+					data: {},
+					dataType: 'json',
+					crossDomain:true,
+					success: submitUserSuccess,
+					failure: submitUserFailure,
+					postback: {}
+				});
+			});
+			$("#post_touch").bind('touchstart', function () {
+				var params = {};
+				params.username = 'raja';
+				$.ajax({
+					type: 'POST',
+					url: 'http://10.100.103.19:3333/addPlayer',
+					data: {foo:'this is post method'},
+					dataType: 'json',
+					crossDomain:true,
+					success: submitUserSuccess,
+					failure: submitUserFailure,
+					postback: {}
+				});
+			});
+			
+			$("#get_touch").bind('touchstart', function () {
+
+				var params = {};
+				params.username = 'raja';
+				$.ajax({
+					type: 'GET',
+					url: 'http://10.100.103.19:3333/getPlayers',
+					data: {},
+					dataType: 'json',
+					crossDomain:true,
+					success: submitUserSuccess,
+					failure: submitUserFailure,
+					postback: {}
+				});
+			});
+			
 //			$("#post1").bind('touchstart click', function () {
 //				var params = {};
 //				params.username = 'raja';
@@ -154,8 +216,6 @@
 			function submitUserSuccess(data, postback)
 			{
 				var res = data;
-				console.log(res);
-				console.log(typeof(res));
 				alert("submitUserSuccess");
 				alert(res.foo);
 				createPlayer(input);
