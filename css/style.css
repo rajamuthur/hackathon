@@ -160,7 +160,7 @@ body {
     text-decoration: none;
 }
 .playingCards a.card:hover, .playingCards a.card:active, .playingCards a.card:focus, .playingCards label.card:hover, .playingCards strong .card {
-    bottom: 1em;
+    /* bottom: 1em; */
 }
 .playingCards label.card {
     cursor: pointer;

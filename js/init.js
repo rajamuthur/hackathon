@@ -14,5 +14,4 @@ function drop(ev) {
 function resize(){
 	var w = window.innerWidth;
 	var h = window.innerHeight;
-	alert("window width: "+w+", height: "+h);
 }

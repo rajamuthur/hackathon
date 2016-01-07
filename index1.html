@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Mangathada</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/icon1.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/icon1.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/icon1.png">
+<link rel="apple-touch-icon-precomposed" href="img/icon1.png">
+<link rel="shortcut icon" href="img/icon1.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="description" content="Card game written in HTML/CSS/JS">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript">
+// Example input json
+var input = {
+	"totalplayer":4,
+	"game_id":"1",
+	"group_id":"1",
+	"active_player_id":"1_1",
+	"players":
+		{
+			"0":
+			{
+				"cards_count":3,
+				"show_all_cards":false,
+				"show_first_card":false,
+				"cards_name":["c0","c1","c4"],
+				"player_name":"Mr X",
+				"next_to_play":true,
+				"is_active_player":true,
+				"player_id":"1_1",
+				"position":1
+			},
+			"1":
+			{
+				"cards_count":5,
+				"show_all_cards":false,
+				"show_first_card":false,
+				"cards_name":["d0","d1","c4","d1","d4"],
+				"player_name":"Mr Y",
+				"next_to_play":false,
+				"is_active_player":false,
+				"player_id":"2_1",
+				"position":2
+			},
+			"2":
+			{
+				"cards_count":1,
+				"show_all_cards":false,
+				"show_first_card":false,
+				"cards_name":["c6"],
+				"player_name":"Mr Z",
+				"next_to_play":false,
+				"is_active_player":false,
+				"player_id":"3_1",
+				"position":3
+			},
+			"3":
+			{
+				"cards_count":1,
+				"show_all_cards":false,
+				"show_first_card":false,
+				"cards_name":["c1"],
+				"player_name":"Mr A",
+				"next_to_play":false,
+				"is_active_player":false,
+				"player_id":"4_1",
+				"position":4
+			}
+		},
+	"bank":
+		{
+			"cards_count":4,
+			"show_all_cards":true,
+			"show_first_card":false,
+			"cards_name":["c5","c1","c7","c9"],
+			"player_name":"Mr Bank",
+			"next_to_play":false,
+			"is_active_player":false,
+			"player_id":""
+		}
+};
+
+function createContainer(){
+	
+}
+
+function createPlayer(input){
+	console.log("createPlayer");
+	console.log(input);
+	var output = '';
+	var len = input.totalplayer;
+	var activePlayerId = input.active_player_id;
+	console.log("len: "+len);
+	console.log("activePlayerId: "+activePlayerId);
+	for(var i=0;i<len;i++) 
+	{
+		console.log(input["players"][i]);
+		var playerId = input["players"][i].player_id;
+		var playerCls = "player_"+input["players"][i].position;
+		playerCls += (playerId == activePlayerId)?' currentPlayer':'';
+		console.log("playerCls: "+playerCls);
+		console.log("playerId: "+playerId);
+		output += '<div class="'+playerCls+'">';
+		output += '<div class="playerdetails">';
+		output += '<img src="img/men.png" title="player"/>';
+		output += cardsSet(input["players"][i]);
+		output += '</div>';
+		output += '</div>';
+	}
+	console.log('Output: '+output);
+	console.log(document.getElementById("container"));
+	//document.getElementById("container").innerHTML = output;
+	return output;
+}
+function cardsSet(input){
+	console.log("cardsset input");
+	console.log(input);
+	var output = '';
+	output += '<div class="cardsset">';
+	output += '<span class="c0"></span>';
+	output += '<span class="c1"></span>';
+	output += '<span class="c2"></span>';
+	output += '<span class="c3"></span>';
+	output += '</div>';
+	console.log("cardsset output");
+	console.log(output);
+	return output;
+}
+//createPlayer(input);
+</script>
+</head>
+<body onresize="resize()">
+	<div class="container">
+		<div class="topplayer">
+			<div class="topplayerdetails">
+				<img src="img/men.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag3"/>
+			</div>
+		</div>
+		<div class="leftplayer">
+			<div class="leftplayerdetails">
+				<img src="img/women.png" title="player"  draggable="true" ondragstart="drag(event)" id="drag2"/>
+			</div>
+		</div>
+		<div class="centerplayer">
+			<div class="centerplayerdetails" ondrop="drop(event)" ondragover="allowDrop(event)">
+				
+			</div>
+		</div>
+		<div class="rightplayer">
+			<div class="rightplayerdetails">
+				<img src="img/men.png" title="player" />
+				
+			</div>
+		</div>
+		<div class="bottomplayer">
+			<div class="bottomplayerdetails" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img src="img/women.png" height="25" width="25" title="player" draggable="true" ondragstart="drag(event)" id="drag1"/>		
+				<div class="cardsset">
+					<span class="c0"></span>
+					<span class="c1"></span>
+					<span class="c2"></span>
+					<span class="c3"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <script>
+	document.write(createPlayer(input));
+	</script>
+	<div id="container" class="container"></div> -->
+
+</body>
+</html>
