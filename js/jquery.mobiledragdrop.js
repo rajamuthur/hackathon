@@ -26,6 +26,7 @@
 	}); 
 
 	function IsValidDrop(id) {
+            alert(id);
 		var returnValue = false;
 		var currentDragParent = "#" + $(currentDrag).parent().attr("id");
 		if (currentDragParent == id) {
@@ -132,6 +133,7 @@
             $(selectorForDraggables).unbind("touchstart");
 			$(selectorForDraggables).live("mousedown touchstart", function() {
 				var id = "#" + $(this).attr("id");
+                                alert(id);
 				ProcessDragEvent(id, selectorForDraggables, selectorForDropZones, selectorForStatus, selectedClass, activeClass);
 				return false;
 			});
