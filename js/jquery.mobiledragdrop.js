@@ -26,7 +26,6 @@
 	}); 
 
 	function IsValidDrop(id) {
-            alert(id);
 		var returnValue = false;
 		var currentDragParent = "#" + $(currentDrag).parent().attr("id");
 		if (currentDragParent == id) {
@@ -56,7 +55,7 @@
 		$(currentDrag).addClass(selectedClass);
 		
 		$("#ghost").remove();
-		$(currentDrag).clone().attr("id", "ghost").css({ position: "absolute" }).appendTo("body").fadeTo(0, 0.5);
+		$(currentDrag).clone().attr("id", "ghost").css({ position: "absolute" }).appendTo("centerplayer").fadeTo(0, 0.5);
 		
 		// Outputs the current draggable item onto the page
 		if (statusSelector.length > 0) {
@@ -79,7 +78,8 @@
 			if (currentDrag.length > 1) {
 				$("#ghost").remove();
 				$(currentDrag).removeClass(selectedClass);
-				$(currentDrag).remove().prependTo(id);
+//                                alert(id);
+				$(currentDrag).remove().appendTo('#drop3 ul.hand');
 				ProcessDragEvent("", dragSelector, dropSelector, statusSelector, selectedClass, activeClass);
 				if (statusSelector.length > 0) {
 					$(statusSelector).find("#dropping").html(id);
@@ -133,7 +133,6 @@
             $(selectorForDraggables).unbind("touchstart");
 			$(selectorForDraggables).live("mousedown touchstart", function() {
 				var id = "#" + $(this).attr("id");
-                                alert(id);
 				ProcessDragEvent(id, selectorForDraggables, selectorForDropZones, selectorForStatus, selectedClass, activeClass);
 				return false;
 			});
@@ -141,6 +140,7 @@
 			// Event handler for drop zones
 			$(selectorForDropZones).live("mouseup touchend", function () {
 				var id = "#" + $(this).attr("id");
+                                
 				ProcessDropEvent(id, selectorForDraggables, selectorForDropZones, selectorForStatus, selectedClass, activeClass);
 				return false;
 			});
