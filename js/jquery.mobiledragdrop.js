@@ -80,6 +80,8 @@
 				$(currentDrag).removeClass(selectedClass);
 //                                alert(id);
 				$(currentDrag).remove().appendTo('#drop3 ul.hand');
+				cardMoved(currentDrag);
+					alert('dropped');
 				ProcessDragEvent("", dragSelector, dropSelector, statusSelector, selectedClass, activeClass);
 				if (statusSelector.length > 0) {
 					$(statusSelector).find("#dropping").html(id);
