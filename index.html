@@ -264,8 +264,16 @@
 				return output;
 
 			}
-//			cardMoved();
+			function cardMoved1(){
+				var socket = io.connect('http://10.100.103.19:3500');
+				socket.emit('card_moved', {player_id:'1_1', game_id: 'm_1', player_name: 'rajamuthu',card_played: '2_H'});
+				socket.on('card_moved', function (msg) {
+					console.log("card_moved:");
+					console.log(msg);
+				});
+			}
 			function cardMoved(d){
+				alert('Your are cardMoved ');
 				$(d).attr('class', '');
 				var cardName = $(d).attr('card');
 				console.log('cardMoved');
@@ -280,7 +288,7 @@
 			}
 			
 			$("#cardmoved").click(function () {
-				cardMoved();
+				cardMoved1();
 			});
 			$("#getPlayersDetails").bind('touchstart click', function () {
 				var username = $("#username").val();
