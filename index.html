@@ -195,7 +195,7 @@
 			function createCenterDiv(input) {
 				var playerCls = 'centerplayer';
 				var output = '';
-				output += '<div class="' + playerCls + '">';
+				output += '<div class="' + playerCls + ' centercards">';
 				output += '<div class="' + playerCls + 'details gradient-pattern drop" id="drop3">';
 				output += '<img src="img/' + input.image + '.png" title="player"/>';
 				output += cardsSet(input, '0');
@@ -225,8 +225,11 @@
 				var output = '';
 				//console.log(input);
 				var cardSet = input.cards_list.reverse();
-				console.log(cardSet);
 				var len = input.cards_count;
+				console.log("len: "+len);
+//				if(len != 0){
+//					len = 9;
+//				}
 				var sac = input.show_all_cards;
 				var sfc = input.show_open_card;
 				output += '<ul class="hand">';
@@ -273,12 +276,12 @@
 				});
 			}
 			function cardMoved(d){
-				alert('Your are cardMoved ');
+//				alert('Your are cardMoved ');
 				$(d).attr('class', '');
 				var cardName = $(d).attr('card');
 				console.log('cardMoved');
 				console.log(d);
-				alert('Your are moved: '+cardName)
+//				alert('Your are moved: '+cardName)
 //				var socket = io.connect('http://10.100.103.19:3500');
 //				socket.emit('card_moved', {player_id:'1_1', game_id: 'm_1', player_name: 'rajamuthu',card_played: '2_H'});
 //				socket.on('card_moved', function (msg) {

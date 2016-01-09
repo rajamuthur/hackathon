@@ -814,8 +814,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1f1f', end
 }
 .centerplayerdetails ul.hand {
     color: red;
+    left: 50%;
     position: absolute;
-    top: 40% !important;
+    top: 50% !important;
 }
 .gradient-pattern {
 /*    background-attachment: scroll, scroll, scroll;
@@ -836,6 +837,107 @@ background: linear-gradient(to right, rgba(36,100,168,1) 0%, rgba(22,116,204,1) 
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2464a8', endColorstr='#2464a8', GradientType=1 );*/
 background: url("../img/download.jpg") repeat fixed 0 0;
 }
-ul.centercard {
-    
+.centercards ul.hand li:nth-child(1) {
+    left: 0;
+    transform: rotate(0deg);
+}
+.centercards ul.hand li:nth-child(2) {
+    left: 0;
+    transform: rotate(45deg);
+}
+.centercards ul.hand li:nth-child(3) {
+    left: 0;
+    transform: rotate(85deg);
+}
+.centercards ul.hand li:nth-child(4) {
+    left: 0;
+    transform: rotate(125deg);
+}
+.centercards ul.hand li:nth-child(5) {
+    left: 0;
+    transform: rotate(165deg);
+}
+.centercards ul.hand li:nth-child(6) {
+    left: 0;
+    transform: rotate(205deg);
+}
+.centercards ul.hand li:nth-child(7) {
+    left: 0;
+	transform: rotate(245deg);
+}
+.centercards ul.hand li:nth-child(8) {
+    left: 0;
+	transform: rotate(285deg);
+}
+.centercards ul.hand li:nth-child(9) {
+    left: 0;
+	transform: rotate(325deg);
+}
+.centercards ul.hand li:nth-child(10) {
+    left: 0;
+	transform: rotate(360deg);
+}
+.centercards ul.hand li:nth-child(11) {
+    left: 0;
+    transform: rotate(0deg);
+}
+.centercards ul.hand li:nth-child(12) {
+    left: 0;
+    transform: rotate(45deg);
+}
+.centercards ul.hand li:nth-child(13) {
+    left: 0;
+    transform: rotate(85deg);
+}
+.centercards ul.hand li:nth-child(14) {
+    left: 0;
+    transform: rotate(125deg);
+}
+.centercards ul.hand li:nth-child(15) {
+    left: 0;
+    transform: rotate(165deg);
+}
+.centercards ul.hand li:nth-child(16) {
+    left: 0;
+    transform: rotate(205deg);
+}
+.centercards ul.hand li:nth-child(17) {
+    left: 0;
+    transform: rotate(245deg);
+}
+.centercards ul.hand li:nth-child(18) {
+    left: 0;
+    transform: rotate(285deg);
+}
+.centercards ul.hand li:nth-child(19) {
+    left: 0;
+	transform: rotate(325deg);
+}
+.centercards ul.hand li:nth-child(20) {
+    left: 0;
+	transform: rotate(360deg);
+}
+.centercards ul.hand li:nth-child(21) {
+    left: 0;
+    transform: rotate(0deg);
+}
+.centercards ul.hand li:nth-child(22) {
+    left: 0;
+    transform: rotate(45deg);
+}
+.centercards ul.hand li:nth-child(23) {
+    left: 0;
+    transform: rotate(85deg);
+}
+.centercards ul.hand li:nth-child(24) {
+    left: 0;
+    transform: rotate(125deg);
+}
+.centercards ul.hand li:nth-child(25) {
+    left: 0;
+    transform: rotate(165deg);
+}
+.centercards ul.hand li:nth-child(26) {
+    left: 0;
+    transform: rotate(210deg);
 }
