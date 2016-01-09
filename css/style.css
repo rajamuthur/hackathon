@@ -1,15 +1,49 @@
 
 body {
+	background: #333333;
+	color: white;
+	font-family: 'Arial';
+/*background: rgba(31,31,31,1);
+background: -moz-linear-gradient(left, rgba(31,31,31,1) 0%, rgba(64,60,64,1) 3%, rgba(102,102,102,1) 29%, rgba(88,88,88,1) 49%, rgba(71,71,71,1) 72%, rgba(43,43,43,1) 96%, rgba(17,17,17,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(31,31,31,1)), color-stop(3%, rgba(64,60,64,1)), color-stop(29%, rgba(102,102,102,1)), color-stop(49%, rgba(88,88,88,1)), color-stop(72%, rgba(71,71,71,1)), color-stop(96%, rgba(43,43,43,1)), color-stop(100%, rgba(17,17,17,1)));
+background: -webkit-linear-gradient(left, rgba(31,31,31,1) 0%, rgba(64,60,64,1) 3%, rgba(102,102,102,1) 29%, rgba(88,88,88,1) 49%, rgba(71,71,71,1) 72%, rgba(43,43,43,1) 96%, rgba(17,17,17,1) 100%);
+background: -o-linear-gradient(left, rgba(31,31,31,1) 0%, rgba(64,60,64,1) 3%, rgba(102,102,102,1) 29%, rgba(88,88,88,1) 49%, rgba(71,71,71,1) 72%, rgba(43,43,43,1) 96%, rgba(17,17,17,1) 100%);
+background: -ms-linear-gradient(left, rgba(31,31,31,1) 0%, rgba(64,60,64,1) 3%, rgba(102,102,102,1) 29%, rgba(88,88,88,1) 49%, rgba(71,71,71,1) 72%, rgba(43,43,43,1) 96%, rgba(17,17,17,1) 100%);
+background: linear-gradient(to right, rgba(31,31,31,1) 0%, rgba(64,60,64,1) 3%, rgba(102,102,102,1) 29%, rgba(88,88,88,1) 49%, rgba(71,71,71,1) 72%, rgba(43,43,43,1) 96%, rgba(17,17,17,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1f1f', endColorstr='#111111', GradientType=1 );*/
+    /*background: rgba(0, 0, 0, 0) linear-gradient(to right, rgba(73, 155, 234, 1) 0%, rgba(32, 124, 229, 1) 100%) repeat scroll 0 0;*/
+    /*background: #333333 url("../img/Mangatha-logo1.png") repeat fixed 0 0 / 480px 250px;*/
+	background: #333333 url("../img/Mangatha-logo1.png") repeat fixed 0 0 / 25% 35%;
     margin: 0 auto;
+	/*opacity: 0.8;*/
 }
+
+/*
+#main {
+   position: relative;
+}
+#main:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("../img/mankatha.png") repeat fixed 0 0; 
+    width: 100%;
+    height: 100%;
+    opacity : 0.2;
+    z-index: -1;
+}*/
+
+
 .container {
 }
 .topplayer {
-    background: orange none repeat scroll 0 0;
     height: 25%;
+    left: 15%;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 70%;
 }
 .topplayerdetails {
     height: 100%;
@@ -23,10 +57,9 @@ body {
     position: absolute;
 }
 .leftplayer {
-    background: gold none repeat scroll 0 0;
-    height: 50%;
+    height: 100%;
     position: absolute;
-    top: 25%;
+    top: 0;
     width: 15%;
 }
 .leftplayerdetails {
@@ -65,11 +98,10 @@ body {
     right: 0;
 }
 .rightplayer {
-    background: yellow none repeat scroll 0 0;
-    height: 50%;
+    height: 100%;
     position: absolute;
     right: 0;
-    top: 25%;
+    top: 0;
     width: 15%;
 }
 .rightplayerdetails {
@@ -92,11 +124,11 @@ body {
     transform: rotate(180deg);
 }
 .bottomplayer {
-    background: orange none repeat scroll 0 0;
     bottom: 0;
     height: 25%;
+    left: 15%;
     position: absolute;
-    width: 100%;
+    width: 70%;
 }
 .bottomplayerdetails {
     height: 100%;
@@ -160,7 +192,6 @@ body {
     text-decoration: none;
 }
 .playingCards a.card:hover, .playingCards a.card:active, .playingCards a.card:focus, .playingCards label.card:hover, .playingCards strong .card {
-    /* bottom: 1em; */
 }
 .playingCards label.card {
     cursor: pointer;
@@ -171,31 +202,31 @@ body {
     background-repeat: repeat;
     text-indent: -4000px;
 }
-.playingCards .card.diams {
+.playingCards .card.D {
     color: #f00 !important;
 }
-.playingCards.fourColours .card.diams {
+.playingCards.fourColours .card.D {
     color: #00f !important;
 }
-[lang="de"] .playingCards.fourColours .card.diams {
+[lang="de"] .playingCards.fourColours .card.D {
     color: #f60 !important;
 }
-.playingCards .card.hearts {
+.playingCards .card.H {
     color: #f00 !important;
 }
-.playingCards .card.spades {
+.playingCards .card.S {
     color: #000 !important;
 }
-[lang="de"] .playingCards.fourColours .card.spades {
+[lang="de"] .playingCards.fourColours .card.S {
     color: #090 !important;
 }
-.playingCards .card.clubs {
+.playingCards .card.C {
     color: #000 !important;
 }
-.playingCards.fourColours .card.clubs {
+.playingCards.fourColours .card.C {
     color: #090 !important;
 }
-[lang="de"] .playingCards.fourColours .card.clubs {
+[lang="de"] .playingCards.fourColours .card.C {
     color: #000 !important;
 }
 .playingCards .card.joker {
@@ -262,14 +293,14 @@ body {
     white-space: pre;
     word-spacing: -0.05em;
 }
-.playingCards .card.hearts .suit::after {
+.playingCards .card.H .suit::after {
     word-spacing: -0.15em;
 }
-.playingCards .card.hearts.rank-10 .suit::after {
+.playingCards .card.H.rank-10 .suit::after {
     letter-spacing: -0.1em;
     word-spacing: -0.05em;
 }
-.playingCards .card.clubs.rank-10 .suit::after {
+.playingCards .card.C.rank-10 .suit::after {
     word-spacing: -0.15em;
 }
 .playingCards .card.rank-8 .suit::after, .playingCards .card.rank-9 .suit::after {
@@ -278,115 +309,115 @@ body {
 .playingCards .card.rank-10 .suit::after {
     letter-spacing: -0.1em;
 }
-.playingCards .card.clubs .suit::after {
+.playingCards .card.C .suit::after {
     letter-spacing: -0.125em;
 }
-.playingCards .card.rank-2.diams .suit::after {
+.playingCards .card.rank-2.D .suit::after {
     content: "♦\a \a ♦";
 }
-.playingCards .card.rank-3.diams .suit::after {
+.playingCards .card.rank-3.D .suit::after {
     content: "♦\a ♦\a ♦";
 }
-.playingCards .card.rank-4.diams .suit::after {
+.playingCards .card.rank-4.D .suit::after {
     content: "♦ ♦\a \a ♦ ♦";
 }
-.playingCards .card.rank-5.diams .suit::after {
+.playingCards .card.rank-5.D .suit::after {
     content: "♦ ♦\a ♦\a ♦ ♦";
 }
-.playingCards .card.rank-6.diams .suit::after {
+.playingCards .card.rank-6.D .suit::after {
     content: "♦ ♦\a ♦ ♦\a ♦ ♦";
 }
-.playingCards .card.rank-7.diams .suit::after {
+.playingCards .card.rank-7.D .suit::after {
     content: "♦ ♦\a ♦ ♦ ♦\a ♦ ♦";
 }
-.playingCards .card.rank-8.diams .suit::after {
+.playingCards .card.rank-8.D .suit::after {
     content: "♦ ♦ ♦\a ♦ ♦\a ♦ ♦ ♦";
 }
-.playingCards .card.rank-9.diams .suit::after {
+.playingCards .card.rank-9.D .suit::after {
     content: "♦ ♦ ♦\a ♦ ♦ ♦\a ♦ ♦ ♦";
 }
-.playingCards .card.rank-10.diams .suit::after {
+.playingCards .card.rank-10.D .suit::after {
     content: "♦ ♦ ♦\a ♦ ♦ ♦ ♦\a ♦ ♦ ♦";
 }
-.playingCards .card.rank-2.hearts .suit::after {
+.playingCards .card.rank-2.H .suit::after {
     content: "♥\a \a ♥";
 }
-.playingCards .card.rank-3.hearts .suit::after {
+.playingCards .card.rank-3.H .suit::after {
     content: "♥\a ♥\a ♥";
 }
-.playingCards .card.rank-4.hearts .suit::after {
+.playingCards .card.rank-4.H .suit::after {
     content: "♥ ♥\a \a ♥ ♥";
 }
-.playingCards .card.rank-5.hearts .suit::after {
+.playingCards .card.rank-5.H .suit::after {
     content: "♥ ♥\a ♥\a ♥ ♥";
 }
-.playingCards .card.rank-6.hearts .suit::after {
+.playingCards .card.rank-6.H .suit::after {
     content: "♥ ♥\a ♥ ♥\a ♥ ♥";
 }
-.playingCards .card.rank-7.hearts .suit::after {
+.playingCards .card.rank-7.H .suit::after {
     content: "♥ ♥\a ♥ ♥ ♥\a ♥ ♥";
 }
-.playingCards .card.rank-8.hearts .suit::after {
+.playingCards .card.rank-8.H .suit::after {
     content: "♥ ♥ ♥\a ♥ ♥\a ♥ ♥ ♥";
 }
-.playingCards .card.rank-9.hearts .suit::after {
+.playingCards .card.rank-9.H .suit::after {
     content: "♥ ♥ ♥\a ♥ ♥ ♥\a ♥ ♥ ♥";
 }
-.playingCards .card.rank-10.hearts .suit::after {
+.playingCards .card.rank-10.H .suit::after {
     content: "♥ ♥ ♥\a ♥ ♥ ♥ ♥\a ♥ ♥ ♥";
 }
-.playingCards .card.rank-2.spades .suit::after {
+.playingCards .card.rank-2.S .suit::after {
     content: "♠\a \a ♠";
 }
-.playingCards .card.rank-3.spades .suit::after {
+.playingCards .card.rank-3.S .suit::after {
     content: "♠\a ♠\a ♠";
 }
-.playingCards .card.rank-4.spades .suit::after {
+.playingCards .card.rank-4.S .suit::after {
     content: "♠ ♠\a \a ♠ ♠";
 }
-.playingCards .card.rank-5.spades .suit::after {
+.playingCards .card.rank-5.S .suit::after {
     content: "♠ ♠\a ♠\a ♠ ♠";
 }
-.playingCards .card.rank-6.spades .suit::after {
+.playingCards .card.rank-6.S .suit::after {
     content: "♠ ♠\a ♠ ♠\a ♠ ♠";
 }
-.playingCards .card.rank-7.spades .suit::after {
+.playingCards .card.rank-7.S .suit::after {
     content: "♠ ♠\a ♠ ♠ ♠\a ♠ ♠";
 }
-.playingCards .card.rank-8.spades .suit::after {
+.playingCards .card.rank-8.S .suit::after {
     content: "♠ ♠ ♠\a ♠ ♠\a ♠ ♠ ♠";
 }
-.playingCards .card.rank-9.spades .suit::after {
+.playingCards .card.rank-9.S .suit::after {
     content: "♠ ♠ ♠\a ♠ ♠ ♠\a ♠ ♠ ♠";
 }
-.playingCards .card.rank-10.spades .suit::after {
+.playingCards .card.rank-10.S .suit::after {
     content: "♠ ♠ ♠\a ♠ ♠ ♠ ♠\a ♠ ♠ ♠";
 }
-.playingCards .card.rank-2.clubs .suit::after {
+.playingCards .card.rank-2.C .suit::after {
     content: "♣\a \a ♣";
 }
-.playingCards .card.rank-3.clubs .suit::after {
+.playingCards .card.rank-3.C .suit::after {
     content: "♣\a ♣\a ♣";
 }
-.playingCards .card.rank-4.clubs .suit::after {
+.playingCards .card.rank-4.C .suit::after {
     content: "♣ ♣\a \a ♣ ♣";
 }
-.playingCards .card.rank-5.clubs .suit::after {
+.playingCards .card.rank-5.C .suit::after {
     content: "♣ ♣\a ♣\a ♣ ♣";
 }
-.playingCards .card.rank-6.clubs .suit::after {
+.playingCards .card.rank-6.C .suit::after {
     content: "♣ ♣\a ♣ ♣\a ♣ ♣";
 }
-.playingCards .card.rank-7.clubs .suit::after {
+.playingCards .card.rank-7.C .suit::after {
     content: "♣ ♣\a ♣ ♣ ♣\a ♣ ♣";
 }
-.playingCards .card.rank-8.clubs .suit::after {
+.playingCards .card.rank-8.C .suit::after {
     content: "♣ ♣ ♣\a ♣ ♣\a ♣ ♣ ♣";
 }
-.playingCards .card.rank-9.clubs .suit::after {
+.playingCards .card.rank-9.C .suit::after {
     content: "♣ ♣ ♣\a ♣ ♣ ♣\a ♣ ♣ ♣";
 }
-.playingCards .card.rank-10.clubs .suit::after {
+.playingCards .card.rank-10.C .suit::after {
     content: "♣ ♣ ♣\a ♣ ♣ ♣ ♣\a ♣ ♣ ♣";
 }
 .playingCards.faceImages .card.rank-j .suit::after, .playingCards.faceImages .card.rank-q .suit::after, .playingCards.faceImages .card.rank-k .suit::after {
@@ -396,40 +427,40 @@ body {
     background-position: -1em 0;
     background-repeat: no-repeat;
 }
-.playingCards.faceImages .card.rank-j.diams {
+.playingCards.faceImages .card.rank-j.D {
     background-image: url("faces/JD.gif");
 }
-.playingCards.faceImages .card.rank-j.hearts {
+.playingCards.faceImages .card.rank-j.H {
     background-image: url("faces/JH.gif");
 }
-.playingCards.faceImages .card.rank-j.spades {
+.playingCards.faceImages .card.rank-j.S {
     background-image: url("faces/JS.gif");
 }
-.playingCards.faceImages .card.rank-j.clubs {
+.playingCards.faceImages .card.rank-j.C {
     background-image: url("faces/JC.gif");
 }
-.playingCards.faceImages .card.rank-q.diams {
+.playingCards.faceImages .card.rank-q.D {
     background-image: url("faces/QD.gif");
 }
-.playingCards.faceImages .card.rank-q.hearts {
+.playingCards.faceImages .card.rank-q.H {
     background-image: url("faces/QH.gif");
 }
-.playingCards.faceImages .card.rank-q.spades {
+.playingCards.faceImages .card.rank-q.S {
     background-image: url("faces/QS.gif");
 }
-.playingCards.faceImages .card.rank-q.clubs {
+.playingCards.faceImages .card.rank-q.C {
     background-image: url("faces/QC.gif");
 }
-.playingCards.faceImages .card.rank-k.diams {
+.playingCards.faceImages .card.rank-k.D {
     background-image: url("faces/KD.gif");
 }
-.playingCards.faceImages .card.rank-k.hearts {
+.playingCards.faceImages .card.rank-k.H {
     background-image: url("faces/KH.gif");
 }
-.playingCards.faceImages .card.rank-k.spades {
+.playingCards.faceImages .card.rank-k.S {
     background-image: url("faces/KS.gif");
 }
-.playingCards.faceImages .card.rank-k.clubs {
+.playingCards.faceImages .card.rank-k.C {
     background-image: url("faces/KC.gif");
 }
 .playingCards.faceImages .card.joker {
@@ -472,19 +503,19 @@ body {
     font-family: Arial,sans-serif;
     line-height: 0.9;
 }
-.playingCards.simpleCards .card.diams .suit::after, .playingCards .card.rank-a.diams .suit::after {
+.playingCards.simpleCards .card.D .suit::after, .playingCards .card.rank-a.D .suit::after {
     content: "♦";
     right: 0.4em;
 }
-.playingCards.simpleCards .card.hearts .suit::after, .playingCards .card.rank-a.hearts .suit::after {
+.playingCards.simpleCards .card.H .suit::after, .playingCards .card.rank-a.H .suit::after {
     content: "♥";
     right: 0.35em;
 }
-.playingCards.simpleCards .card.spades .suit::after, .playingCards .card.rank-a.spades .suit::after {
+.playingCards.simpleCards .card.S .suit::after, .playingCards .card.rank-a.S .suit::after {
     content: "♠";
     right: 0.35em;
 }
-.playingCards.simpleCards .card.clubs .suit::after, .playingCards .card.rank-a.clubs .suit::after {
+.playingCards.simpleCards .card.C .suit::after, .playingCards .card.rank-a.C .suit::after {
     content: "♣";
     right: 0.3em;
 }
@@ -784,19 +815,24 @@ body {
     top: 40% !important;
 }
 .gradient-pattern {
-    background-attachment: scroll, scroll, scroll;
+/*    background-attachment: scroll, scroll, scroll;
     background-clip: border-box;
     background-color: rgb(255, 255, 255);
     background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.098) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.098) 75%, rgba(0, 0, 0, 0.098) 0px), linear-gradient(45deg, rgba(0, 0, 0, 0.098) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.098) 75%, rgba(0, 0, 0, 0.098) 0px), none;
     background-origin: padding-box;
     background-position: 0 0px, 40px 40px;
     background-repeat: repeat, repeat, repeat;
-    background-size: 80px 80px;
-    border: medium solid;
-    box-sizing: content-box;
-    color: rgba(255, 255, 255, 1);
-    font: 100% Arial,Helvetica,sans-serif;
-    height: 98%;
-    text-overflow: clip;
-    width: 100%;
+    background-size: 80px 80px;*/
+/*	background: rgba(36,100,168,1);
+background: -moz-linear-gradient(left, rgba(36,100,168,1) 0%, rgba(22,116,204,1) 13%, rgba(22,116,204,1) 86%, rgba(36,100,168,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(36,100,168,1)), color-stop(13%, rgba(22,116,204,1)), color-stop(86%, rgba(22,116,204,1)), color-stop(100%, rgba(36,100,168,1)));
+background: -webkit-linear-gradient(left, rgba(36,100,168,1) 0%, rgba(22,116,204,1) 13%, rgba(22,116,204,1) 86%, rgba(36,100,168,1) 100%);
+background: -o-linear-gradient(left, rgba(36,100,168,1) 0%, rgba(22,116,204,1) 13%, rgba(22,116,204,1) 86%, rgba(36,100,168,1) 100%);
+background: -ms-linear-gradient(left, rgba(36,100,168,1) 0%, rgba(22,116,204,1) 13%, rgba(22,116,204,1) 86%, rgba(36,100,168,1) 100%);
+background: linear-gradient(to right, rgba(36,100,168,1) 0%, rgba(22,116,204,1) 13%, rgba(22,116,204,1) 86%, rgba(36,100,168,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2464a8', endColorstr='#2464a8', GradientType=1 );*/
+background: url("../img/download.jpg") repeat fixed 0 0;
+}
+.centerCards{
+	
 }
