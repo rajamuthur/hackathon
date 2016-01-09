@@ -164,32 +164,83 @@
 				console.log("className " + className);
 				return className;
 			}
-
+			
+			function getNextPlayerId(myPosition, currentPlayerId){
+				var playersDetails = localStorage.getItem('playersDetails');
+				var myDetails = JSON.parse(playersDetails);
+				console.log("getNextPlayerId");
+				console.log(playersDetails);
+				console.log((myDetails));
+				console.log(("myPosition: "+myPosition));
+				var nextPlayerPos = (myPosition+1) > 4 ? 1: (myPosition+1);
+				console.log(("nextPlayerPos: "+nextPlayerPos));
+				var nextPlayerId = myDetails[nextPlayerPos].playerId;
+				console.log(("nextPlayerId: "+nextPlayerId));
+				return nextPlayerId;
+			}
+			
+			function getUserMyDetails(key){
+				var myCardsObj = localStorage.getItem('myCardsObj');
+				var myDetails = JSON.parse(myCardsObj);
+				console.log("getUserMyDetails:");
+				console.log(JSON.parse(myCardsObj));
+				console.log(('getUserMyDetails '+key+': value: '+myDetails.key));
+				console.log(('getUserMyDetails '+key+': value: '+myDetails[key]));
+				return myDetails[key];
+			}
 
 			function createPlayer(input) {
 				var output = '<div id="container" class="container playingCards">';
 				var len = input.total_players;
+				console.log("len:" + len);
 				var currentPlayerId = input.current_player_id;
 				var yourId = input.your_id;
 				var myPosition = input.your_position;
-				for (var i = 0; i < len; i++)
+				var firstMove = input.first_move;
+				console.log('FirstMove'+firstMove);
+				var playersDetails = {};
+				
+				if(yourId == 'NULL'){
+					yourId = getUserMyDetails('your_id');
+				}
+				if(myPosition == 'NULL'){
+					myPosition = getUserMyDetails('my_position');
+				}
+				
+				for (var i = 0; i <= len; i++)
 				{
+					console.log("I:" + i);
+					console.log(input["players"][i]);
+					console.log(input["players"][i].player_id);
 					var playerId = input["players"][i].player_id;
-					var dragDropCls = (playerId == yourId) ? ' enableDragDrop' : ' disableDragDrop';
-					var playerCls = getCurrentPlayerClass(myPosition, input["players"][i].position);
-					console.log("playerId images: " + input["players"][i].image);
-					output += '<div class="' + playerCls + dragDropCls + '">';
-					output += '<div class="' + playerCls + 'details">';
-					output += '<img src="img/' + input["players"][i].image + '.png" title="player"/>';
-					output += cardsSet(input["players"][i], playerId);
-					output += '</div>';
-					output += '</div>';
+					if (playerId != 'NULL') {
+						var dragDropCls = (playerId == yourId && (currentPlayerId == yourId || (currentPlayerId == 'NULL' && firstMove == true))) ? ' enableDragDrop' : ' disableDragDrop';
+						var playerCls = getCurrentPlayerClass(myPosition, input["players"][i].position);
+						console.log("playerId images: " + input["players"][i].image);
+						output += '<div class="' + playerCls + dragDropCls + '">';
+						output += '<div class="' + playerCls + 'details">';
+						output += '<img src="img/' + input["players"][i].image + '.png" title="' + input["players"][i].player_name + '""/><span>'+input["players"][i].player_name+'</span>';
+						output += cardsSet(input["players"][i], playerId);
+						output += '</div>';
+						output += '</div>';
+						playersDetails[input["players"][i].position] = {'cardTotalCount':input["players"][i].cards_count,'playerId':playerId,'playerPosition':input["players"][i].position};
+						console.log("playersDetails:");
+						console.log(playersDetails);
+					} else {
+						output += createCenterDiv(input["players"][i]);
+					}
 				}
 
-				output += createCenterDiv(input["center_cards"]);
 				output += '</div>';
 				document.getElementById("container").innerHTML = output;
 				document.getElementById("getDetails").innerHTML = '';
+//				return playersDetails;
+				if (typeof (Storage) !== "undefined") {
+					// Put the object into storage
+					localStorage.setItem('playersDetails', JSON.stringify(playersDetails));
+				} else {
+					alert('Sorry! No Web Storage support..');
+				}
 			}
 
 			function createCenterDiv(input) {
@@ -197,8 +248,8 @@
 				var output = '';
 				output += '<div class="' + playerCls + ' centercards">';
 				output += '<div class="' + playerCls + 'details gradient-pattern drop" id="drop3">';
-				output += '<img src="img/' + input.image + '.png" title="player"/>';
-				output += cardsSet(input, '0');
+				output += '<img src="img/' + input.image + '.png" title="' + input.player_name + '" />';
+				output += cardsSet(input, 'NULL');
 				output += getDeckofCards(10);
 				output += '</div>';
 				output += '</div>';
@@ -224,12 +275,9 @@
 				//console.log(input);
 				var output = '';
 				//console.log(input);
-				var cardSet = input.cards_list.reverse();
+				var cardSet = input.cards_list;
 				var len = input.cards_count;
-				console.log("len: "+len);
-//				if(len != 0){
-//					len = 9;
-//				}
+				console.log("len: " + len);
 				var sac = input.show_all_cards;
 				var sfc = input.show_open_card;
 				output += '<ul class="hand">';
@@ -238,23 +286,25 @@
 				for (var i = 0; i < len; i++)
 				{
 					var cardArr = cardSet[i].split('_');
-
 					var cardname = '<span class="rank">' + cardArr[0] + '</span>';
 					var suit = cardArr[1] == 'D' ? '♦' : (cardArr[1] == 'H' ? '♥' : (cardArr[1] == 'C' ? '♣' : '♠'));
 					cardname += '<span class="suit">' + suit + '</span>';
-					if (i == 0 && sac == true && sfc == true) {
+					if ((i == len-1) && sac == true && sfc == true) {
 						cls = 'card rank-' + cardArr[0] + ' ' + cardArr[1];
 						dragCls = 'drag3';
+					} else if (i == 0 && sac == true && sfc == true) {
+						cls = 'card rank-' + cardArr[0] + ' ' + cardArr[1];
+						dragCls = '';
 					} else if (i > 0 && sac == true) {
 						cls = 'card rank-' + cardArr[0] + ' ' + cardArr[1];
 						dragCls = '';
-						dragCls = 'drag3';
+						dragCls = '';
 					} else {
 						cls = 'card back';
 						cardname = '';
 						dragCls = '';
 					}
-					output += '<li card="'+cardSet[i]+'" class="' + dragCls + '" id="' + playerId + '_' + i + '">';
+					output += '<li card="' + cardSet[i] + '" class="' + dragCls + '" id="' + playerId + '_' + i + '" >';
 					output += '<a href="#" class="' + cls + '">';
 					output += cardname;
 					output += '</a>';
@@ -267,29 +317,43 @@
 				return output;
 
 			}
-			function cardMoved1(){
-				var socket = io.connect('http://10.100.103.19:3500');
-				socket.emit('card_moved', {player_id:'1_1', game_id: 'm_1', player_name: 'rajamuthu',card_played: '2_H'});
-				socket.on('card_moved', function (msg) {
-					console.log("card_moved:");
-					console.log(msg);
-				});
-			}
-			function cardMoved(d){
-//				alert('Your are cardMoved ');
-				$(d).attr('class', '');
-				var cardName = $(d).attr('card');
-				console.log('cardMoved');
-				console.log(d);
-//				alert('Your are moved: '+cardName)
+			function cardMoved1() {
+//				$(d).attr('class', '');
+//				var cardName = $(d).attr('card');
 //				var socket = io.connect('http://10.100.103.19:3500');
-//				socket.emit('card_moved', {player_id:'1_1', game_id: 'm_1', player_name: 'rajamuthu',card_played: '2_H'});
+//				// Retrieve the object from storage
+//				var myCardsObj = localStorage.getItem('myCardsObj');
+//				console.log("cardMoved1");
+//				console.log(myCardsObj);
+//				socket.emit('card_moved', {player_id: '1_1', game_id: 'm_1', player_name: 'rajamuthu', card_played: cardName, 'next_player_id': '1_2'});
 //				socket.on('card_moved', function (msg) {
 //					console.log("card_moved:");
 //					console.log(msg);
 //				});
 			}
-			
+			function cardMoved(d) {
+				var cardName = $(d).attr('card');
+				
+				var myCardsObj = localStorage.getItem('myCardsObj1');
+				var myDetails = JSON.parse(myCardsObj);
+				console.log("cardMoved1");
+				console.log(JSON.parse(myCardsObj));
+				console.log((myDetails));
+				console.log(myDetails.my_position);
+				console.log(myDetails.your_id);
+				console.log(myDetails.game_id);
+				console.log((cardName));
+				var nextPlayerId = getNextPlayerId(myDetails.my_position, myDetails.your_id);
+				console.log('nextPlayerId: '+nextPlayerId);
+				// Retrieve the object from storage
+				var socket = io.connect('http://10.100.103.19:3500');
+				socket.emit('card_moved', {player_id: myDetails.your_id, game_id: myDetails.game_id, player_name: myDetails.username, card_played: cardName, 'next_player_id': nextPlayerId});
+				socket.on('card_moved', function (msg) {
+					console.log("card_moved:");
+					console.log(msg);
+				});
+			}
+
 			$("#cardmoved").click(function () {
 				cardMoved1();
 			});
@@ -302,6 +366,20 @@
 					console.log("Messages");
 					console.log(msg);
 					createPlayer(msg);
+					var yourId = msg.your_id;
+					if(yourId != 'NULL'){
+						var myPosition = msg.your_position;
+						var gameId = msg.game_id;
+
+						var myCardsObj = {'your_id': yourId, 'my_position': myPosition, 'game_id': gameId, 'next_player_id':'', 'username': username};
+						if (typeof (Storage) !== "undefined") {
+							// Put the object into storage
+							localStorage.setItem('myCardsObj', JSON.stringify(myCardsObj));
+							localStorage.setItem('myCardsObj1', JSON.stringify(myCardsObj));
+						} else {
+							alert('Sorry! No Web Storage support..');
+						}
+					}
 					enbleDragAndDrop();
 				});
 			});
