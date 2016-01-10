@@ -58,6 +58,7 @@
                 -moz-box-shadow:    inset 0 0 10px #000000;
 				-webkit-box-shadow: inset 0 0 10px #000000;
 				box-shadow:         inset 0 0 10px #000000;
+				border: 1px solid;
             }
         </style>
     </head>
@@ -172,11 +173,49 @@
 				console.log(playersDetails);
 				console.log((myDetails));
 				console.log(("myPosition: "+myPosition));
+//				var nextPlayerId = getNextPostion(myDetails, myPosition);
 				var nextPlayerPos = (myPosition+1) > 4 ? 1: (myPosition+1);
+				var nId;
 				console.log(("nextPlayerPos: "+nextPlayerPos));
-				var nextPlayerId = myDetails[nextPlayerPos].playerId;
-				console.log(("nextPlayerId: "+nextPlayerId));
-				return nextPlayerId;
+				if(myDetails[nextPlayerPos].cardTotalCount != 0){
+					nId = myDetails[nextPlayerPos].playerId;
+				} else {
+					nextPlayerPos = (nextPlayerPos+1) > 4 ? 1: (nextPlayerPos+1);
+					if(myDetails[nextPlayerPos].cardTotalCount != 0){
+						nId = myDetails[nextPlayerPos].playerId;
+					}else{
+						nextPlayerPos = (nextPlayerPos+1) > 4 ? 1: (nextPlayerPos+1);
+						if(myDetails[nextPlayerPos].cardTotalCount != 0){
+							nId = myDetails[nextPlayerPos].playerId;
+						}
+					}
+				}
+				
+				return nId;
+				
+//				var nextPlayerPos = (myPosition+1) > 4 ? 1: (myPosition+1);
+//				console.log(("nextPlayerPos: "+nextPlayerPos));
+//				if(myDetails[nextPlayerPos].cardTotalCount != 0){
+//					var nextPlayerId = myDetails[nextPlayerPos].playerId;
+//					console.log(("nextPlayerId: "+nextPlayerId));
+//				} else {
+//					
+//				}
+				
+			}
+			
+			function getNextPostion(myDetails, myPosition){
+				var nextPlayerPos = (myPosition+1) > 4 ? 1: (myPosition+1);
+				var nId;
+				console.log(("nextPlayerPos: "+nextPlayerPos));
+				if(myDetails[nextPlayerPos].cardTotalCount != 0){
+					nId = myDetails[nextPlayerPos].playerId;
+					console.log(("nId "+nId));
+				} else {
+					getNextPostion(myDetails, nextPlayerPos);
+				}
+				console.log(("nId "+nId));
+				return nId;
 			}
 			
 			function getUserMyDetails(key){
@@ -217,13 +256,13 @@
 						var dragDropCls = (playerId == yourId && (currentPlayerId == yourId || (currentPlayerId == 'NULL' && firstMove == true))) ? ' enableDragDrop' : ' disableDragDrop';
 						var playerCls = getCurrentPlayerClass(myPosition, input["players"][i].position);
 						console.log("playerId images: " + input["players"][i].image);
-						output += '<div class="' + playerCls + dragDropCls + '">';
+						output += '<div class="' + playerCls + dragDropCls + '" id="'+playerId+'">';
 						output += '<div class="' + playerCls + 'details">';
 						output += '<img src="img/' + input["players"][i].image + '.png" title="' + input["players"][i].player_name + '""/><span>'+input["players"][i].player_name+'</span>';
-						output += cardsSet(input["players"][i], playerId);
+						output += cardsSet(input["players"][i], playerId, false);
 						output += '</div>';
 						output += '</div>';
-						playersDetails[input["players"][i].position] = {'cardTotalCount':input["players"][i].cards_count,'playerId':playerId,'playerPosition':input["players"][i].position};
+						playersDetails[input["players"][i].position] = {'cardTotalCount':input["players"][i].cards_count,'playerId':playerId,'playerPosition':input["players"][i].position,'gameLose':input["players"][i].game_lose};
 						console.log("playersDetails:");
 						console.log(playersDetails);
 					} else {
@@ -249,7 +288,7 @@
 				output += '<div class="' + playerCls + ' centercards">';
 				output += '<div class="' + playerCls + 'details gradient-pattern drop" id="drop3">';
 				output += '<img src="img/' + input.image + '.png" title="' + input.player_name + '" />';
-				output += cardsSet(input, 'NULL');
+				output += cardsSet(input, 'NULL', true);
 				output += getDeckofCards(10);
 				output += '</div>';
 				output += '</div>';
@@ -270,17 +309,24 @@
 				return output += '</ul>';
 			}
 
-			function cardsSet(input, playerId) {
+			function cardsSet(input, playerId, noreverse) {
 				console.log("cardsset input");
 				//console.log(input);
 				var output = '';
 				//console.log(input);
 				var cardSet = input.cards_list;
+				if(!noreverse){
+					cardSet = cardSet.reverse();
+				} 
 				var len = input.cards_count;
 				console.log("len: " + len);
+				console.log("input.game_lose " + input.game_lose);
 				var sac = input.show_all_cards;
 				var sfc = input.show_open_card;
 				output += '<ul class="hand">';
+				if(input.game_lose == true){
+					output += 'You Lost the Game';
+				}
 				var cls;
 				var dragCls = '';
 				for (var i = 0; i < len; i++)
@@ -297,7 +343,6 @@
 						dragCls = '';
 					} else if (i > 0 && sac == true) {
 						cls = 'card rank-' + cardArr[0] + ' ' + cardArr[1];
-						dragCls = '';
 						dragCls = '';
 					} else {
 						cls = 'card back';
@@ -344,13 +389,14 @@
 				console.log(myDetails.game_id);
 				console.log((cardName));
 				var nextPlayerId = getNextPlayerId(myDetails.my_position, myDetails.your_id);
-				console.log('nextPlayerId: '+nextPlayerId);
+				console.log('nextPlayerId global: '+nextPlayerId);
 				// Retrieve the object from storage
 				var socket = io.connect('http://10.100.103.19:3500');
 				socket.emit('card_moved', {player_id: myDetails.your_id, game_id: myDetails.game_id, player_name: myDetails.username, card_played: cardName, 'next_player_id': nextPlayerId});
 				socket.on('card_moved', function (msg) {
 					console.log("card_moved:");
 					console.log(msg);
+					checkPlayerWin();
 				});
 			}
 
@@ -370,20 +416,48 @@
 					if(yourId != 'NULL'){
 						var myPosition = msg.your_position;
 						var gameId = msg.game_id;
-
 						var myCardsObj = {'your_id': yourId, 'my_position': myPosition, 'game_id': gameId, 'next_player_id':'', 'username': username};
 						if (typeof (Storage) !== "undefined") {
 							// Put the object into storage
 							localStorage.setItem('myCardsObj', JSON.stringify(myCardsObj));
 							localStorage.setItem('myCardsObj1', JSON.stringify(myCardsObj));
+							
 						} else {
 							alert('Sorry! No Web Storage support..');
 						}
 					}
+					checkPlayerWin();
 					enbleDragAndDrop();
 				});
 			});
-
+			
+			function checkPlayerWin(){
+				var playersDetails = localStorage.getItem('playersDetails');
+				var myDetails = JSON.parse(playersDetails);
+				console.log("checkPlayerWin");
+				console.log("checkPlayerWin len1:"+myDetails.length);
+				console.log("checkPlayerWin :"+Object.keys(myDetails).length);
+				console.log(playersDetails);
+				console.log((myDetails));
+				var cnt = 0;
+				var winPlayer = '';
+				
+				for (var i = 1; i <= Object.keys(myDetails).length ; i++)
+				{
+					console.log((myDetails[i]));
+					if(myDetails[i].gameLose){
+						cnt += 1;
+					} else {
+						winPlayer = myDetails[i].playerId;
+					}
+				}
+				console.log(("winPlayer: "+winPlayer));
+				console.log(("cnt: "+cnt));
+				if(cnt == 3){
+					$('#'+winPlayer).html('Win the Game');
+				}
+			}
+			
 			function enbleDragAndDrop() {
 				$("body").bind("touch click", '.drag3', function () {
 					$(".enableDragDrop .drag3").mobiledraganddrop({targets: "#drop3", status: "#status"});
