@@ -262,7 +262,7 @@
 						output += cardsSet(input["players"][i], playerId, false);
 						output += '</div>';
 						output += '</div>';
-						playersDetails[input["players"][i].position] = {'cardTotalCount':input["players"][i].cards_count,'playerId':playerId,'playerPosition':input["players"][i].position,'gameLose':input["players"][i].game_lose};
+						playersDetails[input["players"][i].position] = {'cardTotalCount':input["players"][i].cards_list.length,'playerId':playerId,'playerPosition':input["players"][i].position,'gameLose':input["players"][i].game_lose};
 						console.log("playersDetails:");
 						console.log(playersDetails);
 					} else {
@@ -318,7 +318,7 @@
 				if(!noreverse){
 					cardSet = cardSet.reverse();
 				} 
-				var len = input.cards_count;
+				var len = input.cards_list.length;
 				console.log("len: " + len);
 				console.log("input.game_lose " + input.game_lose);
 				var sac = input.show_all_cards;
