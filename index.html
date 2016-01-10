@@ -57,17 +57,18 @@
             .enableDragDrop{
                 -moz-box-shadow:    inset 0 0 10px #000000;
 				-webkit-box-shadow: inset 0 0 10px #000000;
-				box-shadow:         inset 0 0 10px #000000;
-				border: 1px solid;
+				box-shadow: 0 0 10px #000000 inset;
+				background-color: #2b6308;
+				opacity: 0.85;
             }
         </style>
     </head>
     <body id="main" onresize="resize()">
-        <div class="getDetails" id="getDetails" style="padding-top:40px">
-            <label >Enter Your Username</label>
-			<input type="text" name="username" id="username"/>
+        <div class="ad1" id="ad1"></div>
+        <div class="ad2" id="ad2"></div>
+        <div class="getDetails" id="getDetails">
+			<input type="text" name="username" id="username" placeholder="Username"/><br/><br/>
             <input type="button" value="Submit" name="getPlayersDetails" id="getPlayersDetails"/>
-            <input type="button" value="cardmoved" name="cardmoved" id="cardmoved"/>
         </div>
         <div id="container" class="container playingCards"></div>
         <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -165,34 +166,34 @@
 				console.log("className " + className);
 				return className;
 			}
-			
-			function getNextPlayerId(myPosition, currentPlayerId){
+
+			function getNextPlayerId(myPosition, currentPlayerId) {
 				var playersDetails = localStorage.getItem('playersDetails');
 				var myDetails = JSON.parse(playersDetails);
 				console.log("getNextPlayerId");
 				console.log(playersDetails);
 				console.log((myDetails));
-				console.log(("myPosition: "+myPosition));
+				console.log(("myPosition: " + myPosition));
 //				var nextPlayerId = getNextPostion(myDetails, myPosition);
-				var nextPlayerPos = (myPosition+1) > 4 ? 1: (myPosition+1);
+				var nextPlayerPos = (myPosition + 1) > 4 ? 1 : (myPosition + 1);
 				var nId;
-				console.log(("nextPlayerPos: "+nextPlayerPos));
-				if(myDetails[nextPlayerPos].cardTotalCount != 0){
+				console.log(("nextPlayerPos: " + nextPlayerPos));
+				if (myDetails[nextPlayerPos].cardTotalCount != 0) {
 					nId = myDetails[nextPlayerPos].playerId;
 				} else {
-					nextPlayerPos = (nextPlayerPos+1) > 4 ? 1: (nextPlayerPos+1);
-					if(myDetails[nextPlayerPos].cardTotalCount != 0){
+					nextPlayerPos = (nextPlayerPos + 1) > 4 ? 1 : (nextPlayerPos + 1);
+					if (myDetails[nextPlayerPos].cardTotalCount != 0) {
 						nId = myDetails[nextPlayerPos].playerId;
-					}else{
-						nextPlayerPos = (nextPlayerPos+1) > 4 ? 1: (nextPlayerPos+1);
-						if(myDetails[nextPlayerPos].cardTotalCount != 0){
+					} else {
+						nextPlayerPos = (nextPlayerPos + 1) > 4 ? 1 : (nextPlayerPos + 1);
+						if (myDetails[nextPlayerPos].cardTotalCount != 0) {
 							nId = myDetails[nextPlayerPos].playerId;
 						}
 					}
 				}
-				
+
 				return nId;
-				
+
 //				var nextPlayerPos = (myPosition+1) > 4 ? 1: (myPosition+1);
 //				console.log(("nextPlayerPos: "+nextPlayerPos));
 //				if(myDetails[nextPlayerPos].cardTotalCount != 0){
@@ -201,30 +202,30 @@
 //				} else {
 //					
 //				}
-				
+
 			}
-			
-			function getNextPostion(myDetails, myPosition){
-				var nextPlayerPos = (myPosition+1) > 4 ? 1: (myPosition+1);
+
+			function getNextPostion(myDetails, myPosition) {
+				var nextPlayerPos = (myPosition + 1) > 4 ? 1 : (myPosition + 1);
 				var nId;
-				console.log(("nextPlayerPos: "+nextPlayerPos));
-				if(myDetails[nextPlayerPos].cardTotalCount != 0){
+				console.log(("nextPlayerPos: " + nextPlayerPos));
+				if (myDetails[nextPlayerPos].cardTotalCount != 0) {
 					nId = myDetails[nextPlayerPos].playerId;
-					console.log(("nId "+nId));
+					console.log(("nId " + nId));
 				} else {
 					getNextPostion(myDetails, nextPlayerPos);
 				}
-				console.log(("nId "+nId));
+				console.log(("nId " + nId));
 				return nId;
 			}
-			
-			function getUserMyDetails(key){
+
+			function getUserMyDetails(key) {
 				var myCardsObj = localStorage.getItem('myCardsObj');
 				var myDetails = JSON.parse(myCardsObj);
 				console.log("getUserMyDetails:");
 				console.log(JSON.parse(myCardsObj));
-				console.log(('getUserMyDetails '+key+': value: '+myDetails.key));
-				console.log(('getUserMyDetails '+key+': value: '+myDetails[key]));
+				console.log(('getUserMyDetails ' + key + ': value: ' + myDetails.key));
+				console.log(('getUserMyDetails ' + key + ': value: ' + myDetails[key]));
 				return myDetails[key];
 			}
 
@@ -236,16 +237,16 @@
 				var yourId = input.your_id;
 				var myPosition = input.your_position;
 				var firstMove = input.first_move;
-				console.log('FirstMove'+firstMove);
+				console.log('FirstMove' + firstMove);
 				var playersDetails = {};
-				
-				if(yourId == 'NULL'){
+
+				if (yourId == 'NULL') {
 					yourId = getUserMyDetails('your_id');
 				}
-				if(myPosition == 'NULL'){
+				if (myPosition == 'NULL') {
 					myPosition = getUserMyDetails('my_position');
 				}
-				
+
 				for (var i = 0; i <= len; i++)
 				{
 					console.log("I:" + i);
@@ -256,13 +257,16 @@
 						var dragDropCls = (playerId == yourId && (currentPlayerId == yourId || (currentPlayerId == 'NULL' && firstMove == true))) ? ' enableDragDrop' : ' disableDragDrop';
 						var playerCls = getCurrentPlayerClass(myPosition, input["players"][i].position);
 						console.log("playerId images: " + input["players"][i].image);
-						output += '<div class="' + playerCls + dragDropCls + '" id="'+playerId+'">';
+						output += '<div class="' + playerCls + dragDropCls + '" id="' + playerId + '">';
+						output += '<img src="img/' + input["players"][i].image + '.png" title="' + input["players"][i].player_name + '"" class="playerslogo"/><span class="playersname">' + input["players"][i].player_name + '</span>';
+						if (input["players"][i].game_lose == true) {
+							output += '<span class="playerslost">Sorry! <br />You lost</span>';
+						}
 						output += '<div class="' + playerCls + 'details">';
-						output += '<img src="img/' + input["players"][i].image + '.png" title="' + input["players"][i].player_name + '""/><span>'+input["players"][i].player_name+'</span>';
-						output += cardsSet(input["players"][i], playerId, false);
+						output += cardsSet(input["players"][i], yourId, false);
 						output += '</div>';
 						output += '</div>';
-						playersDetails[input["players"][i].position] = {'cardTotalCount':input["players"][i].cards_list.length,'playerId':playerId,'playerPosition':input["players"][i].position,'gameLose':input["players"][i].game_lose};
+						playersDetails[input["players"][i].position] = {'cardTotalCount': input["players"][i].cards_list.length, 'playerId': playerId, 'playerPosition': input["players"][i].position, 'gameLose': input["players"][i].game_lose};
 						console.log("playersDetails:");
 						console.log(playersDetails);
 					} else {
@@ -272,7 +276,12 @@
 
 				output += '</div>';
 				document.getElementById("container").innerHTML = output;
-				document.getElementById("getDetails").innerHTML = '';
+				document.getElementById('getDetails').style.display = "none";
+				document.getElementById('ad1').style.display = "none";
+				document.getElementById('ad2').style.display = "none";
+//				if (!document.getElementById("getDetails")) {
+//					document.getElementById("getDetails").remove();
+//				}
 //				return playersDetails;
 				if (typeof (Storage) !== "undefined") {
 					// Put the object into storage
@@ -287,7 +296,7 @@
 				var output = '';
 				output += '<div class="' + playerCls + ' centercards">';
 				output += '<div class="' + playerCls + 'details gradient-pattern drop" id="drop3">';
-				output += '<img src="img/' + input.image + '.png" title="' + input.player_name + '" />';
+//				output += '<img src="img/' + input.image + '.png" title="' + input.player_name + '" />';
 				output += cardsSet(input, 'NULL', true);
 				output += getDeckofCards(10);
 				output += '</div>';
@@ -309,24 +318,22 @@
 				return output += '</ul>';
 			}
 
-			function cardsSet(input, playerId, noreverse) {
+			function cardsSet(input, yourId, noreverse) {
 				console.log("cardsset input");
 				//console.log(input);
 				var output = '';
 				//console.log(input);
 				var cardSet = input.cards_list;
-				if(!noreverse){
+				if (!noreverse) {
 					cardSet = cardSet.reverse();
-				} 
+				}
 				var len = input.cards_list.length;
 				console.log("len: " + len);
 				console.log("input.game_lose " + input.game_lose);
 				var sac = input.show_all_cards;
 				var sfc = input.show_open_card;
 				output += '<ul class="hand">';
-				if(input.game_lose == true){
-					output += 'You Lost the Game';
-				}
+				
 				var cls;
 				var dragCls = '';
 				for (var i = 0; i < len; i++)
@@ -335,7 +342,7 @@
 					var cardname = '<span class="rank">' + cardArr[0] + '</span>';
 					var suit = cardArr[1] == 'D' ? '♦' : (cardArr[1] == 'H' ? '♥' : (cardArr[1] == 'C' ? '♣' : '♠'));
 					cardname += '<span class="suit">' + suit + '</span>';
-					if ((i == len-1) && sac == true && sfc == true) {
+					if ((i == len - 1) && yourId == input.player_id && sfc == true) {
 						cls = 'card rank-' + cardArr[0] + ' ' + cardArr[1];
 						dragCls = 'drag3';
 					} else if (i == 0 && sac == true && sfc == true) {
@@ -349,7 +356,7 @@
 						cardname = '';
 						dragCls = '';
 					}
-					output += '<li card="' + cardSet[i] + '" class="' + dragCls + '" id="' + playerId + '_' + i + '" >';
+					output += '<li card="' + cardSet[i] + '" class="' + dragCls + '" id="' + input.player_id + '_' + i + '" >';
 					output += '<a href="#" class="' + cls + '">';
 					output += cardname;
 					output += '</a>';
@@ -378,7 +385,7 @@
 			}
 			function cardMoved(d) {
 				var cardName = $(d).attr('card');
-				
+
 				var myCardsObj = localStorage.getItem('myCardsObj1');
 				var myDetails = JSON.parse(myCardsObj);
 				console.log("cardMoved1");
@@ -389,7 +396,7 @@
 				console.log(myDetails.game_id);
 				console.log((cardName));
 				var nextPlayerId = getNextPlayerId(myDetails.my_position, myDetails.your_id);
-				console.log('nextPlayerId global: '+nextPlayerId);
+				console.log('nextPlayerId global: ' + nextPlayerId);
 				// Retrieve the object from storage
 				var socket = io.connect('http://10.100.103.19:3500');
 				socket.emit('card_moved', {player_id: myDetails.your_id, game_id: myDetails.game_id, player_name: myDetails.username, card_played: cardName, 'next_player_id': nextPlayerId});
@@ -413,15 +420,15 @@
 					console.log(msg);
 					createPlayer(msg);
 					var yourId = msg.your_id;
-					if(yourId != 'NULL'){
+					if (yourId != 'NULL') {
 						var myPosition = msg.your_position;
 						var gameId = msg.game_id;
-						var myCardsObj = {'your_id': yourId, 'my_position': myPosition, 'game_id': gameId, 'next_player_id':'', 'username': username};
+						var myCardsObj = {'your_id': yourId, 'my_position': myPosition, 'game_id': gameId, 'next_player_id': '', 'username': username};
 						if (typeof (Storage) !== "undefined") {
 							// Put the object into storage
 							localStorage.setItem('myCardsObj', JSON.stringify(myCardsObj));
 							localStorage.setItem('myCardsObj1', JSON.stringify(myCardsObj));
-							
+
 						} else {
 							alert('Sorry! No Web Storage support..');
 						}
@@ -430,34 +437,34 @@
 					enbleDragAndDrop();
 				});
 			});
-			
-			function checkPlayerWin(){
+
+			function checkPlayerWin() {
 				var playersDetails = localStorage.getItem('playersDetails');
 				var myDetails = JSON.parse(playersDetails);
 				console.log("checkPlayerWin");
-				console.log("checkPlayerWin len1:"+myDetails.length);
-				console.log("checkPlayerWin :"+Object.keys(myDetails).length);
+				console.log("checkPlayerWin len1:" + myDetails.length);
+				console.log("checkPlayerWin :" + Object.keys(myDetails).length);
 				console.log(playersDetails);
 				console.log((myDetails));
 				var cnt = 0;
 				var winPlayer = '';
-				
-				for (var i = 1; i <= Object.keys(myDetails).length ; i++)
+
+				for (var i = 1; i <= Object.keys(myDetails).length; i++)
 				{
 					console.log((myDetails[i]));
-					if(myDetails[i].gameLose){
+					if (myDetails[i].gameLose) {
 						cnt += 1;
 					} else {
 						winPlayer = myDetails[i].playerId;
 					}
 				}
-				console.log(("winPlayer: "+winPlayer));
-				console.log(("cnt: "+cnt));
-				if(cnt == 3){
-					$('#'+winPlayer).html('Win the Game');
+				console.log(("winPlayer: " + winPlayer));
+				console.log(("cnt: " + cnt));
+				if (cnt == 3) {
+					$('#' + winPlayer).html('<span class="playerwin">Hurray! <br/>You won the game.</span>');
 				}
 			}
-			
+
 			function enbleDragAndDrop() {
 				$("body").bind("touch click", '.drag3', function () {
 					$(".enableDragDrop .drag3").mobiledraganddrop({targets: "#drop3", status: "#status"});
