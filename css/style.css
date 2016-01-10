@@ -343,8 +343,9 @@ input#username {
     cursor: pointer;
 }
 .playingCards .card.back {
-    background-color: #ccc;
+    background-color: #333333;
     background-image: -moz-repeating-linear-gradient(34% 6% 135deg, #0f1e59, #75a1bf, #3e3e63 50%);
+    background-image: -webkit-repeating-linear-gradient(34% 6% 135deg, #0f1e59, #75a1bf, #3e3e63 50%);
     background-repeat: repeat;
     text-indent: -4000px;
 }

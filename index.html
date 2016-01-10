@@ -266,7 +266,7 @@
 						output += cardsSet(input["players"][i], yourId, false);
 						output += '</div>';
 						output += '</div>';
-						playersDetails[input["players"][i].position] = {'cardTotalCount': input["players"][i].cards_list.length, 'playerId': playerId, 'playerPosition': input["players"][i].position, 'gameLose': input["players"][i].game_lose};
+						playersDetails[input["players"][i].position] = {'cardTotalCount': input["players"][i].cards_list.length, 'playerId': playerId, 'playerPosition': input["players"][i].position, 'gameLose': input["players"][i].game_lose, 'playersName':input["players"][i].player_name};
 						console.log("playersDetails:");
 						console.log(playersDetails);
 					} else {
@@ -448,6 +448,7 @@
 				console.log((myDetails));
 				var cnt = 0;
 				var winPlayer = '';
+				var winPlayerName = '';
 
 				for (var i = 1; i <= Object.keys(myDetails).length; i++)
 				{
@@ -456,12 +457,13 @@
 						cnt += 1;
 					} else {
 						winPlayer = myDetails[i].playerId;
+						winPlayerName = myDetails[i].playersName;
 					}
 				}
 				console.log(("winPlayer: " + winPlayer));
 				console.log(("cnt: " + cnt));
 				if (cnt == 3) {
-					$('#' + winPlayer).html('<span class="playerwin">Hurray! <br/>You won the game.</span>');
+					$('#' + winPlayer).html('<span class="playerwin">Hurray! <br/>'+winPlayerName+' won the game.</span>');
 				}
 			}
 
