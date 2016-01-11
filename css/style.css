@@ -145,7 +145,7 @@ input#username {
     transform: rotate(90deg);
 }
 .centerplayer {
-    height: 50%;
+    height: 49%;
     left: 15%;
     position: absolute;
     top: 25%;
@@ -243,6 +243,7 @@ input#username {
 	left: 10%;
 	font-size: 30px;
 	font-weight: bold;
+	color: rgb(255, 244, 22);
 }
 .bottomplayer span.playersname {
     background-color: #852209;
@@ -265,7 +266,7 @@ input#username {
     top: 25%;
 }
 .bottomplayer span.playerslost {
-    font-size: 30px;
+    font-size: 22px;
     left: 20%;
     position: absolute;
     right: 5px;
@@ -958,7 +959,7 @@ input#username {
 }
 .centerplayerdetails ul.hand {
     color: red;
-    left: 50%;
+    left: 49%;
     position: absolute;
     top: 50% !important;
 }
@@ -1084,4 +1085,7 @@ input#username {
 .centercards ul.hand li:nth-child(26) {
     left: 0;
     transform: rotate(210deg);
+}
+.playerslost{
+	color: #FF3F00;
 }
